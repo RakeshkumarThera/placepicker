@@ -14,8 +14,8 @@ function App() {
   const [availablePlaces, setAvailablePlaces] = useState([]);
   const [pickedPlaces, setPickedPlaces] = useState([]);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position)=> {
+  useEffect(() => {                                            //UseEffect helps to execute after loading all components, 1sr arg is function and 2nd arg is dependencies, 2nd arg helps to decide how many times to reload the component
+    navigator.geolocation.getCurrentPosition((position)=> {    //this is the side-effect
       const sortedPlaces = sortPlacesByDistance(
         AVAILABLE_PLACES,
         position.coords.latitude,
@@ -24,7 +24,7 @@ function App() {
       
       setAvailablePlaces(sortedPlaces);
     });
-  }, []);
+  }, []);  // Empty dependency triggers only one execution and no dependency mentioning will trigger infinte loop
 
   function handleStartRemovePlace(id) {
     modal.current.open();
